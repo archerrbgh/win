@@ -1,1 +1,2 @@
-# User account module
+"""User account module
+"""
