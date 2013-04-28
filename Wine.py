@@ -1,1 +1,2 @@
-# Wine page processing module
+"""Wine page processing module
+"""
