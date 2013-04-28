@@ -1,1 +1,2 @@
-# Wine page postprocessing module
+"""Wine page postprocessing module
+"""
