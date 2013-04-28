@@ -1,1 +1,2 @@
-# Inventory system postprocessing module
+"""Inventory system postprocessing module
+"""
