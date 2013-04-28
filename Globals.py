@@ -1,1 +1,2 @@
-# Global declarations
+"""Global declarations
+"""
