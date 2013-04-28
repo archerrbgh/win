@@ -1,1 +1,2 @@
-# Profile page module
+"""Profile page module
+"""
