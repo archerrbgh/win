@@ -1,1 +1,2 @@
-# Inventory system preprocessing module
+"""Inventory system preprocessing module
+"""
