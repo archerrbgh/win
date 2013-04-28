@@ -1,1 +1,2 @@
-# Splash page module
+"""Splash page module
+"""
