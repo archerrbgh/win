@@ -1,1 +1,2 @@
-# Recommender system postprocessing module
+"""Recommender system postprocessing module
+"""
