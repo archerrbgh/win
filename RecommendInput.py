@@ -4,6 +4,11 @@
 import Recommend
 
 
+def inputRecommend(user):
+  """Preprocess recommendation of wines to user
+  """
+
+
 def inputGetWinesByAttr(attributes):
   """Preprocess retrieval of wines with qualities 
   similar to attributes
