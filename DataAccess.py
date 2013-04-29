@@ -28,8 +28,18 @@ def dbGetWinesByName(name):
   """
  
 
-def dbAddWineGlobal(wine)
+def dbAddWineGlobal(wine):
   """Add a new wine to the global database
+  """
+  
+  
+def dbDeleteWineGlobal(wine):
+  """Delete wine from the global database
+  """
+
+
+def dbRateWineGlobal(wine, rating):
+  """Update the global rating of a wine in database
   """
   
   
@@ -43,27 +53,32 @@ def dbGetInventory(user):
   """
   
   
-def dbAddUserWine(user, wine):
+def dbAddWineUser(user, wine):
   """Add a wine to the user's inventory in database
   """
   
   
-def dbAddUserStorage(user, storage):
+def dbAddStorage(user, storage):
   """Add a new storage location to user's profile
   in database
   """
   
   
-def dbDeleteUserWine(user, wine):
+def dbDeleteWineUser(user, wine):
   """Delete a wine from user's inventory in database
   """
   
   
-def dbDeleteUserStorage(user, storage):
+def dbDeleteStorage(user, storage):
   """Delete a user's storage location in database
   """
   
   
 def dbAddToStorage(user, storage, wine):
   """Add wine to a user's storage location in database
+  """
+  
+  
+def dbRateWineUser(user, wine, rating):
+  """Store user's rating of wine in database
   """
