@@ -10,22 +10,22 @@ def getInventory(user):
   """
   
   
-def addUserWine(user, wine):
+def addWineUser(user, wine):
   """Add wine to user's inventory
   """
   
 
-def addUserStorage(user, storage):
+def addStorage(user, storage):
   """Add storage location to user's inventory
   """
   
   
-def deleteUserWine(user, wine):
+def deleteWineUser(user, wine):
   """Delete wine from user's inventory
   """
   
   
-def deleteUserStorage(user, storage):
+def deleteStorage(user, storage):
   """Delete user's storage location
   """
   
