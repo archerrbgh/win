@@ -9,12 +9,12 @@ def inputGetInventory(user):
   """
   
   
-def inputAddUserWine(user, wine):
+def inputAddWineUser(user, wine):
   """Preprocess addition of wine to user's inventory
   """
   
 
-def inputAddUserStorage(user, storage):
+def inputAddStorage(user, storage):
   """Preprocess addition of storage location to
   user's inventory
   """
@@ -25,7 +25,7 @@ def inputDeleteUserWine(user, wine):
   """
   
   
-def inputDeleteUserStorage(user, storage):
+def inputDeleteStorage(user, storage):
   """Preprocess deletion of user's storage location
   """
   
