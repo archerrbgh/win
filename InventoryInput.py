@@ -1,6 +1,8 @@
 """Inventory system preprocessing module
 """
 
+import Inventory
+
 
 def inputGetInventory(user):
   """Preprocess retrieval of user's inventory
