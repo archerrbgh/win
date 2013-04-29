@@ -2,6 +2,7 @@
 """
 
 import DataAccess
+import ProfileOutput
 
 
 def createUser(username, password):
