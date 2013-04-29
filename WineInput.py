@@ -4,6 +4,6 @@
 import Wine
 
 
-def buyWine(wine):
+def inputBuyWine(wine):
   """Preprocess purchase of wine
   """
