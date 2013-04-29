@@ -1,6 +1,8 @@
 """User account module
 """
 
+import DataAccess
+
 
 def createUser(username, password):
   """Process new user info before adding to database
