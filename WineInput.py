@@ -2,3 +2,8 @@
 """
 
 import Wine
+
+
+def buyWine(wine):
+  """Preprocess purchase of wine
+  """
