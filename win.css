@@ -1,0 +1,61 @@
+body{
+background: black;
+position: absolute;
+top: 0%;
+bottom: 0%;
+left: 0%;
+right: 0%;
+background-image: url("http://s5.goodfon.com/image/406859-1680x1050.jpg");
+background-size: cover;
+}
+
+.top-bar{
+background: #330F0F;
+height: 50px;
+opacity: 0.85;
+border-bottom-left-radius: 15px;
+
+}
+
+.name
+{
+font-family: Georgia, serif;
+}
+
+.small-button{
+height: 50px;
+opacity: .9;
+font-family: Georgia, serif;
+font-size: 30px;
+}
+
+.someText{
+font-family: Georgia, serif;
+font-size: 30px;
+}
+
+.divider{
+height: 70px;
+}
+
+.has-form
+{
+border-color: #000000;
+position: relative;
+width: 100%;
+
+}
+.panel
+{
+background: #000000;
+position: relative;
+left: 70%;
+right: 5%;
+width: 25%;
+border-radius: 20px;
+border-color: #330F0F;
+border-width: 3px;
+}
+
+
+
