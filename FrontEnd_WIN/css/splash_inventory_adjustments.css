@@ -5,9 +5,10 @@ top: 0%;
 bottom: 0%;
 left: 0%;
 right: 0%;
-background-image: url("http://s5.goodfon.com/image/406859-1680x1050.jpg");
+background-image: url("http://s5.goodfon.com/image/317539-1366x768.jpg");
 background-size: contain;
 background-repeat:no-repeat;
+
 }
 
 .top-bar{
@@ -23,14 +24,12 @@ h1
 font-family: Georgia, serif;
 }
 
-
-
 h3
 {
 font-family: 'IM Fell French Canon', serif;
 color: #746767;
 font-size: 40px;
-padding-left: 60%;
+padding-left: 5%;
 }
 
 .small-button{
@@ -83,7 +82,6 @@ border-width: 3px;
 	padding-left: 15px;
 	padding-right: 15px;
 }
-
 .sl_examples a{
     display:block;
     position:relative;
@@ -118,16 +116,12 @@ border-width: 3px;
 }
 #example1{
 	font-family: 'Libre Baskerville', serif;
-	color: black;
+
 }
 #example2{
 	font-family: 'Libre Baskerville', serif;
+	color: black;
 }
 #example3{
 	font-family: 'Libre Baskerville', serif;
 }
-
-
-
-
-
