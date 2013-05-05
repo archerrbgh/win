@@ -219,3 +219,15 @@ def viewArchive(userID, locationID):
     dict: A dict representing the archive of the form {added:[*], removed:[*], etc}. Include
           timestamps for each element (have each element be a tuple including the time?).
   """
+  
+  
+def rateWineUser(userID, wineID, rating):
+  """Store user's rating of wine in database
+  
+  Call the DataAccess layer to store the wine's rating in the user's inventory.
+  
+  Args:
+    int userID: The userID of the user.
+    int wineID: The wineID of the wine to be rated.
+    int rating: The rating on a 1-5 scale.
+  """
