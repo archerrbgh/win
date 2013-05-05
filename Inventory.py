@@ -5,7 +5,7 @@ def getWine(user, wineID):
   """Retrieve wine from user's inventory
   
   Call the DataAccess layer to retrive information about the wine.
-  Return a dict representing properties of the wine that the IO layer uses to
+  Wine object epresenting properties of the wine that the IO layer uses to
   list the wine.
   
   Args:
