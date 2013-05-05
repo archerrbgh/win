@@ -10,7 +10,7 @@ import Wine
 def getWine(userID, wineID):
   """Retrieve wine from user's inventory
   
-  Call teh DataAccess layer to retrive information about the wine.
+  Call the DataAccess layer to retrive information about the wine.
   Return a dict representing properties of the wine that the IO layer uses to
   list the wine.
   
@@ -22,7 +22,23 @@ def getWine(userID, wineID):
     dict: Dict representing the wine in the form {wineName:*, personalStarRating:*, etc}
           Include the information that will be displayed on the Inventory web page.
   """
+
+
+def searchInventory(userID, wine):
+  """Search through inventories for matching wine.
   
+  Call the DataAccess layer to find a wine matching the specified properties.
+  
+  Args:
+    int userID: The userID of the user.
+    dict wine: A dict detailing properties of the wine to look for, in the form
+               {wineName:*, winery:*, etc}. Not all fields stored in the database
+               have to be present. The qualities field is another dict that stores
+               the qualities of the wine.
+               
+  Return:
+    list: A list of wineIDs of wines matching the search parameters.
+  """
   
 def addWineUser(userID, wine, count, locationID = -1):
   """Add wine to user's inventory
@@ -186,4 +202,20 @@ def sortInventory(userID, locationID, key, descend = True):
     int locationID: The locationID of the inventory location.
     string key: Determines what property to sort by ("dryness", "sweetness", etc).
     bool descend: If key is a numeric property, check this to determine sort order.
+  """
+ 
+ 
+def viewArchive(userID, locationID):
+  """Retrieve the archive of a user's inventory
+  
+  Call the DataAccess layer to retrieve details about the inventory's archive. Return the 
+  necesary information as a dict.
+  
+  Args:
+    int userID: The userID of the user.
+    int locationID: The locationID of the inventory location.
+    
+  Return:
+    dict: A dict representing the archive of the form {added:[*], removed:[*], etc}. Include
+          timestamps for each element (have each element be a tuple including the time?).
   """
