@@ -93,6 +93,34 @@ def dbGetInventory(user):
   """
   
   
+def dbGetLocation(user, locationID):
+  """Retrieve a user's inventory location
+  
+  Retrieve an inventory location from the location map.
+  
+  Args:
+    User user: The User object of the user.
+    int locationID: The locationID of the location.
+    
+  Return:
+    Location: The Location object of the location.
+  """
+  
+
+def dbGetWineUser(user, wineID):
+  """Retrieve a user's wine from inventory
+  
+  Retrieve the specified wine from the user's locations.
+  
+  Args:
+    User user: The User object of the user.
+    int wineID: The wineID of the wine.
+    
+  Return:
+    Wine: The Wine object of the wine.
+  """
+  
+  
 def dbAddWineUser(user, wine, count, location = -1):
   """Add a wine to the user's inventory in database
   
@@ -142,7 +170,38 @@ def dbDeleteInventory(user, location):
     Location location: The Location object of the location.
   """
   
+
+def dbEditInventory(user, location, changes):
+  """Edit a user's inventory
   
+  Edit the properties of an inventory location. For every property specified in 
+  changes, replace the corresponding old property with the new one.
+  
+  Args:
+    User user: The User object of the user who is deleting a location.
+    Location location: The Location object of the location being modified.
+    dict changes: A dictionary specifying properties and values of the form
+                  {locationName:*, imagePath:*, etc}. Not all fields stored in the
+                  database have to be present.
+  """
+
+
+def dbEditEntryUser(user, wine, changes):
+  """Edit a wine in the user's inventory
+  
+  Edit the properties of a wine. For every property specified in
+  changes, replace the corresponding old property with the new one.
+  
+  Args:
+    User user: The User object of the user who is editing wines.
+    Wine wine: The Wine object of the wine to be edited.
+    dict changes: A dictionary specifying properties and values of the form
+                  {locationID:*, qualities:*, etc}. Not all fields stored in the database
+                  have to be present. The qualities field contains another dict representing
+                  wine properties.
+  """
+
+
 def dbRateWineUser(user, wine, rating):
   """Store user's rating of wine in database
   
