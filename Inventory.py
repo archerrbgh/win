@@ -9,7 +9,7 @@ def getWine(user, wineID):
   list the wine.
   
   Args:
-    User userID: The User object of the user.
+    User user: The User object of the user.
     int wineID: The wineID of the wine being requested.
     
   Return:
