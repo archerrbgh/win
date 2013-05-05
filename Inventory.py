@@ -143,7 +143,7 @@ def editEntryUser(userID, wineID, changes):
                   wine properties.
   """
   
-def importInventory(userID, xml):
+def importInventory(userID, file):
   """Import a new inventory using an XML file
   
   Call the DataAccess layer to create a new inventory and give it the properties detailed
@@ -151,7 +151,7 @@ def importInventory(userID, xml):
   
   Args:
     int userID: The userID of the user who is importing an inventory.
-    dict xml: A dictionary representation of the XML file. Specifies the properties of the
+    dict file: A dictionary representation of the XML file. Specifies the properties of the
               inventory and the wines stored in it. Its format is 
               {locationName:*, creationTimestamp:*, etc). There should be enough information
               to fully generate an inventory.
