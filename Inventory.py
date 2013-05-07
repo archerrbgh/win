@@ -1,20 +1,63 @@
 """Inventory system processing module
 """
 
-def getWine(user, wineID):
+def getWine(user, locationID, wineID):
   """Retrieve wine from user's inventory
   
   Call the DataAccess layer to retrive information about the wine.
-  Wine object epresenting properties of the wine that the IO layer uses to
-  list the wine.
+  Returns LocationInventory object representing properties of the wine 
+  that the IO layer uses to list the wine.
   
   Args:
-    User user: The User object of the user.
+    UserInfo user: The UserInfo object of the user.
+    int locationID: The locationID of the wine being requested.
     int wineID: The wineID of the wine being requested.
     
   Return:
-    Wine: Wine object of the wine.
-          Includes the information that will be displayed on the Inventory web page.
+    LocationInventory: LocationInventory object of the wine.
+                       Includes the information that will be displayed on the Inventory web page.
+  """
+
+
+def getLocation(user, locationID):
+  """Retrieve a location from the user's location map
+  
+  Call the DataAccess layer to retrieve a location.
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    int locationID: The locationID of the location.
+    
+  Return:
+    LocationMap: LocationMap object of the location.
+  """
+  
+  
+def getLocationHistory(user, locationID, wineID):
+  """Retrieve a location history 
+  
+  Call the DataAccess layer to retrieve a location history.
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    int locationID: The locationID of the location history.
+    int wineID: The wineID of the location history.
+    
+  Return:
+    LocationHistory: LocationHistory object of the location history.
+  """
+  
+
+def addLocationHistory(user, locationID, wineID, eventTag):
+  """Add a Location History to the database.
+  
+  Call the DataAccess layer to insert a new Location History.
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    int locationID: The locationID of the location.
+    int wineID: The wineID of the wine.
+    string eventTag: Message detailing the history.
   """
 
 
@@ -24,36 +67,34 @@ def searchInventory(user, wine):
   Call the DataAccess layer to find a wine matching the specified properties.
   
   Args:
-    User user: The User object of the user.
-    dict wine: A dict detailing properties of the wine to look for, in the form
-               {wineName:*, winery:*, etc}. Not all fields stored in the database
-               have to be present. The qualities field is another dict that stores
-               the qualities of the wine.
+    UserInfo user: The UserInfo object of the user.
+    LocationInventory wine: A partially filled LocationInventory object detailing properties of the wine 
+                            to look for. Not all fields stored in the database have to be present as 
+                            instance variables, some of which might be None.
                
   Return:
-    list: A list of Wine objects of wines matching the search parameters.
+    list: A list of LocationInventory objects of wines matching the search parameters.
   """
   
-def addWineUser(user, wine, count, location = -1):
+  
+def addWineUser(user, wine, count, location):
   """Add wine to user's inventory
   
   Call the DataAccess layer to insert the given wine into the specified inventory.
-  If the wine doesn't exist already, generate a new wineID for it. If it does exist,
-  increment its quantity. Update the Location History.
+  If the wine doesn't exist already, generate a new wineID for it and assign its location. 
+  If it does exist, increment its quantity. Update the Location History.
   
   Args:
-    User user: The User object of the user who is adding the wine.
-    dict wine: A dictionary representing a wine of the form {wineName:*, winery:*,...}
-               Not all the fields stored in the database have to be present. For the 
-               averageQualities key, the value is another dictionary specifying the 
-               traits and float values.
+    UserInfo user: The UserInfo object of the user who is adding the wine.
+    LocationInventory wine: A partially filled LocationInventory object representing the wine.
+                            Not all the fields stored in the database have to be present,
+                            such as li_locationID and li_wineID.
     int count: The quantity of this wine to add.
-    Location location: The Location object defining which inventory to insert in. If unspecified,
-                       just store in user's total inventory.
+    LocationMap location: The LocationMap object defining which inventory to insert in.
   """
   
   
-def moveWine(user, wine, location1, location2, count, copy = False):
+def moveWine(user, wine, location, count, copy = False):
   """Move a wine from one location to another
   
   Call the DataAccess layer to insert wines into location2. If copy is True, don't
@@ -62,23 +103,25 @@ def moveWine(user, wine, location1, location2, count, copy = False):
   Update the Location History.
   
   Args:
-    User user: The User object of the user who is moving wines.
-    Wine wine: The Wine object of the wine being moved.
-    Location location1: The Location object of where the wine is currently stored.
-    Location location2: The Location object of where the wine is moved to.
+    UserInfo user: The UserInfo object of the user who is moving wines.
+    LocationInventory wine: The LocationInventory object of the wine being moved.
+    LocationMap location: The LocationMap object defining where to move the wine.
     int count: The number of wines to move. If more than the actual quantity, move all.
-    bool copy: True if a copy of the wine is being stored in location 2, not the wine itself.
+    bool copy: True if a copy of the wine is being stored in location, not the wine itself.
   """
 
-def addInventory(user, locationName):
+
+def addInventory(user, location):
   """Add inventory location to user's location map
   
   Call the DataAccess layer to create a new inventory location in the user's Location
-  Map. Update the Location History.
+  Map. Assign everything other than locationName and imagePath, which are already made. 
+  Update the Location History.
   
   Args:
-    User user: The User object of the user who is adding the inventory.
-    string locationName: The name of the new location.
+    UserInfo user: The UserInfo object of the user who is adding the inventory.
+    LocationMap location: Partially filled LocationMap object that only defines locationName and
+                          maybe imagePath.
   """
   
   
@@ -89,8 +132,8 @@ def deleteWineUser(user, wine, count):
   Update the Location History.
   
   Args:
-    User user: The User object of the user who is deleting wine.
-    Wine wine: The Wine object of the wine being deleted.
+    UserInfo user: The UserInfo object of the user who is deleting wine.
+    LocationInventory wine: The LocationInventory object of the wine being deleted.
     int count: The number of this wine to delete. If more than actually exist, delete all.
   """
   
@@ -102,8 +145,8 @@ def deleteInventory(user, location):
   Update the Location History.
   
   Args:
-    User user: The User object of the user who is deleting a location.
-    Location location: The Location object of the location being deleted.
+    UserInfo user: The UserInfo object of the user who is deleting a location.
+    LocationMap location: The LocationMap object of the location being deleted.
   """
 
 
@@ -112,10 +155,11 @@ def editInventory(user, location, changes):
   
   Call the DataAccess layer to edit the properties of an inventory location. For every
   property specified in changes, replace the corresponding old property with the new one.
+  Update the Location History.
   
   Args:
-    User user: The User object of the user who is deleting a location.
-    Location location: The Location object of the location being modified.
+    UserInfo user: The UserInfo object of the user who is deleting a location.
+    LocationMap location: The LocationMap object of the location being modified.
     dict changes: A dictionary specifying properties and values of the form
                   {locationName:*, imagePath:*, etc}. Not all fields stored in the
                   database have to be present.
@@ -126,16 +170,17 @@ def editEntryUser(user, wine, changes):
   """Edit a wine in the user's inventory
   
   Call the DataAccess layer to edit the properties of a wine. For every property specified in
-  changes, replace the corresponding old property with the new one.
+  changes, replace the corresponding old property with the new one. 
+  Update the Location History.
   
   Args:
-    User user: The User object of the user who is editing wines.
-    Wine wine: The Wine object of the wine to be edited.
+    UserInfo user: The UserInfo object of the user who is editing wines.
+    LocationInventory wine: The LocationInventory object of the wine to be edited.
     dict changes: A dictionary specifying properties and values of the form
-                  {locationID:*, qualities:*, etc}. Not all fields stored in the database
-                  have to be present. The qualities field contains another dict representing
-                  wine properties.
+                  {li_locationID:*, quantity:*, etc}. Not all fields stored in the database
+                  have to be present.
   """
+  
   
 def importInventory(user, file):
   """Import a new inventory using an XML file
@@ -144,7 +189,7 @@ def importInventory(user, file):
   in the XML file.
   
   Args:
-    User user: The User object of the user who is importing an inventory.
+    UserInfo user: The UserInfo object of the user who is importing an inventory.
     XML file: The XML file. Specifies the properties of the
               inventory and the wines stored in it.  There should be enough information
               to fully generate an inventory.
@@ -159,8 +204,8 @@ def exportInventory(user, location):
   contained in it.
   
   Args:
-    User user: The User object of the user who is requesting an XML.
-    Location location: The location of the inventory location.
+    UserInfo user: The UserInfo object of the user who is requesting an XML.
+    LocationMap location: The LocationMap object of the inventory location.
   
   Return:
     The XML representation of the inventory.
@@ -175,8 +220,8 @@ def viewStats(user, location):
   a dictionary detailing the information and return it.
   
   Args:
-    User user: The User object of the user requesting stats.
-    Location location: The Location object of the location being analyzed.
+    UserInfo user: The UserInfo object of the user requesting stats.
+    LocationMap location: The LocationMap object of the location being analyzed.
     
   Return:
     dict: A dictionary detailing information specified as required in Globals
@@ -191,13 +236,13 @@ def sortInventory(user, location, key, descend = True):
   of Wine objects in sorted order and return it.
   
   Args:
-    User user: The User object of the user.
-    Location location: The Location object of the inventory location.
+    UserInfo user: The UserInfo object of the user.
+    LocationMap location: The LocationMap object of the inventory location.
     string key: Determines what property to sort by ("dryness", "sweetness", etc).
     bool descend: If key is a numeric property, check this to determine sort order.
     
   Return:
-    list: A list of Wine objects in sorted order.
+    list: A list of LocationInventory objects in sorted order.
   """
  
  
@@ -208,12 +253,11 @@ def viewArchive(user, location):
   necesary information as a dict.
   
   Args:
-    User user: The User object of the user.
-    Location location: The Location object of the inventory location.
+    UserInfo user: The User object of the user.
+    LocationMap location: The LocationMap object of the inventory location.
     
   Return:
-    dict: A dict representing the archive of the form {added:[*], removed:[*], etc}. Include
-          timestamps for each element (have each element be a tuple including the time?).
+    list: A list of LocationHistory objects.
   """
   
   
@@ -221,9 +265,10 @@ def rateWineUser(user, wine, rating):
   """Store user's rating of wine in database
   
   Call the DataAccess layer to store the wine's rating in the user's inventory.
+  Update the Location History.
   
   Args:
-    User user: The User object of the user.
-    Wine wine: The Wine object of the wine to be rated.
+    UserInfo user: The UserInfo object of the user.
+    LocationInventory wine: The LocationInventory object of the wine to be rated.
     int rating: The rating on a 1-5 scale.
   """
