@@ -12,23 +12,18 @@ def dbGetUser(userID):
     int userID: The userID of the user being retrieved.
     
   Return:
-    User: A User object specifying relevant information about the user}. Store enough 
-          information to generate a user profile page.
-  
+    UserInfo: A UserInfo object specifying relevant information about the user. Store enough 
+              information to generate a user profile page.
   """
 
 
-def dbCreateUser(username, password, attr = 0):
+def dbCreateUser(user):
   """Add new user to database
   
-  Insert a new user into the database with the given password, and optionally specify
-  additional details from attr. Create a new userID for the user.
+  Insert a new user into the database.
   
   Args:
-    string username: The name of the user being created.
-    string password: The user's password.
-    dict attr: An optional attribute dict of the form {email:*, DOB:*, etc}. If this is
-               included, then store the relevant information in the database for the user.
+    UserInfo user: UserInfo object representing the user. Take all fields from this object.
   """
   
 
@@ -39,7 +34,7 @@ def dbUpdateUser(user, attr):
   passed in attr.
   
   Args:
-    Object user: The User object of the user being modified.
+    UserInfo user: The UserInfo object of the user being modified.
     dict attr: A dict specifying user attributes, of the form {email:*, DOB:*, etc}. Not every
                field stored in the database has to be present.
   """
@@ -83,13 +78,13 @@ def dbRandomWines():
 def dbGetInventory(user):
   """Retrieve a user's inventory from database
   
-  Return a list of wineIDs representing the wines in a user's inventory.
+  Return a list of LocationInventory objects representing the wines in a user's inventory.
   
   Args:
-    User user: The User object of the user.
+    UserInfo user: The UserInfo object of the user.
     
   Return:
-    list: A list of Location objects detailing the user's entire inventory. 
+    list: A list of LocationInventory objects detailing the user's entire inventory. 
   """
   
   
@@ -99,42 +94,55 @@ def dbGetLocation(user, locationID):
   Retrieve an inventory location from the location map.
   
   Args:
-    User user: The User object of the user.
+    UserInfo user: The UserInfo object of the user.
     int locationID: The locationID of the location.
     
   Return:
-    Location: The Location object of the location.
+    LocationMap: The LocationMap object of the location.
   """
   
 
-def dbGetWineUser(user, wineID):
+def dbGetWineUser(user, wineID, locationID):
   """Retrieve a user's wine from inventory
   
-  Retrieve the specified wine from the user's locations.
+  Retrieve the specified wine from the user's location.
   
   Args:
-    User user: The User object of the user.
+    UserInfo user: The UserInfo object of the user.
     int wineID: The wineID of the wine.
+    int locationID: The locationID of the wine's location.
     
   Return:
-    Wine: The Wine object of the wine.
+    LocationInventory: The LocationInventory object of the wine.
   """
   
   
-def dbAddWineUser(user, wine, count, location = -1):
+def dbGetLocationHistory(user, locationID, wineID):
+  """Retrieve a location history
+  
+  Retrieve a specific Location History.
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    int locationID: The locationID of the location history.
+    int wineID: The wineID of the location history.
+    
+  Return:
+    LocationHistory: The LocationHistory object of the location history
+  """
+  
+  
+def dbAddWineUser(user, wine, count):
   """Add a wine to the user's inventory in database
   
   Insert the given wine into the specified inventory.
   Include the attributes in wine, which will include a new
-  wineID. If location is unspecified, store the wine in the user's
-  global inventory.
+  wineID.
   
   Args:
-    User user: The User object of the user.
-    Wine wine: A Wine object representing a wine.
+    UserInfo user: The UserInfo object of the user.
+    LocationInventory wine: A LocationInventory object representing a wine.
     int count: The number of this wine to add.
-    Location location: If specified, the location of the inventory to
-                       insert the wine into.
   """
   
   
@@ -144,8 +152,19 @@ def dbAddInventory(user, location):
   Insert a new inventory location into the user's Location Map.
   
   Args:
-    User user: The User object of the user.
-    Location location: The Location object of the location.
+    UserInfo user: The UserInfo object of the user.
+    LocationMap location: The LocationMap object of the location.
+  """
+  
+  
+def dbAddLocationHistory(user, history):
+  """Add a new location history to the database.
+  
+  Insert a new location history into the database.
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    LocationHistory history: The LocationHistory object representing the new history.
   """
   
   
@@ -155,8 +174,8 @@ def dbDeleteWineUser(user, wine, count):
   Delete count amounts of the wine from the user's locations.
   
   Args:
-    User user: The User object of the user.
-    Wine wine: The Wine object of the wine.
+    UserInfo user: The UserInfo object of the user.
+    LocationInventory wine: The LocationInventory object of the wine.
   """
   
   
@@ -166,8 +185,8 @@ def dbDeleteInventory(user, location):
   Delete an inventory location from user's Location Map.
   
   Args:
-    User user: The User object of the user.
-    Location location: The Location object of the location.
+    UserInfo user: The UserInfo object of the user.
+    LocationInventory location: The LocationInventory object of the location.
   """
   
 
@@ -178,8 +197,8 @@ def dbEditInventory(user, location, changes):
   changes, replace the corresponding old property with the new one.
   
   Args:
-    User user: The User object of the user who is deleting a location.
-    Location location: The Location object of the location being modified.
+    UserInfo user: The UserInfo object of the user who is deleting a location.
+    LocationMap location: The LocationMap object of the location being modified.
     dict changes: A dictionary specifying properties and values of the form
                   {locationName:*, imagePath:*, etc}. Not all fields stored in the
                   database have to be present.
@@ -193,12 +212,11 @@ def dbEditEntryUser(user, wine, changes):
   changes, replace the corresponding old property with the new one.
   
   Args:
-    User user: The User object of the user who is editing wines.
-    Wine wine: The Wine object of the wine to be edited.
+    UserInfo user: The UserInfo object of the user who is editing wines.
+    LocationInventory wine: The LocationInventory object of the wine to be edited.
     dict changes: A dictionary specifying properties and values of the form
-                  {locationID:*, qualities:*, etc}. Not all fields stored in the database
-                  have to be present. The qualities field contains another dict representing
-                  wine properties.
+                  {li_locationID:*, li_wineID:*, etc}. Not all fields stored in the database
+                  have to be present.
   """
 
 
@@ -208,8 +226,7 @@ def dbRateWineUser(user, wine, rating):
   Store the rating of the specified wine in the user's inventory.
   
   Args:
-    User user: The User object of the user.
-    Wine wine: The wine object of the wine.
+    UserInfo user: The UserInfo object of the user.
+    LocationInventory wine: The LocationInventory object of the wine.
     int rating: The rating on a 1-5 scale.
-  
   """
