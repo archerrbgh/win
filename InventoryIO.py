@@ -4,54 +4,249 @@
 #Exceptions thrown below this layer are not caught here, they are allowed
 # to raise up to the ajax layer
 
-import Inventory
 import re
 import datetime
 
+
+def inputGetWine(user, locationID, wineID):
+  """Preprocess retrieval of wine from user's inventory
+  
+  Call the Model layer to retrive information about the wine.
+  Returns LocationInventory object representing properties of the wine 
+  that the IO layer uses to list the wine.
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    int locationID: The locationID of the wine being requested.
+    int wineID: The wineID of the wine being requested.
+    
+  Return:
+    LocationInventory: LocationInventory object of the wine.
+                       Includes the information that will be displayed on the Inventory web page.
+  """
+
+
+def inputGetLocation(user, locationID):
+  """Preprocess retrieval of a location from the user's location map
+  
+  Call the Model layer to retrieve a location.
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    int locationID: The locationID of the location.
+    
+  Return:
+    LocationMap: LocationMap object of the location.
+  """
+
+
+def inputGetLocationHistory(user, locationID, wineID):
+  """Preprocess retrieval of a location history 
+  
+  Call the Model layer to retrieve a location history.
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    int locationID: The locationID of the location history.
+    int wineID: The wineID of the location history.
+    
+  Return:
+    LocationHistory: LocationHistory object of the location history.
+  """
+
+
 def inputGetInventory(user):
   """Preprocess retrieval of user's inventory
+  
+  Return a list of LocationInventory objects representing the wines in a user's inventory.
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    
+  Return:
+    list: A list of LocationInventory objects detailing the user's entire inventory.
   """
   validateUser(user)
   getInventory(user)
   getInventory(user) 
   
-def inputAddWineUser(user, wine):
+  
+def inputSearchInventory(user, wine):
+  """Preprocess searching through inventories for matching wine.
+  
+  Return a list of LocationInventory objects showing wines that fit the search parameters.
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    dict wine: A dict detailing properties of the wine to look for. Not all fields stored 
+               in the database have to be present.
+               
+  Return:
+    list: A list of LocationInventory objects of wines matching the search parameters.
+  """
+  
+  
+def inputAddWineUser(user, wine, count, location):
   """Preprocess addition of wine to user's inventory
+  
+  Args:
+    UserInfo user: The UserInfo object of the user who is adding the wine.
+    LocationInventory wine: A partially filled LocationInventory object representing the wine.
+                            Not all the fields stored in the database have to be present,
+                            such as li_locationID and li_wineID.
+    int count: The quantity of this wine to add.
+    LocationMap location: The LocationMap object defining which inventory to insert in.
   """
   validateUser(user)
   validateWine(wine)
   addWineUser(user,wine)
   
-def inputAddStorage(user, storage):
-  """Preprocess addition of storage location to
-  user's inventory
+  
+def inputMoveWine(user, wine, location, count, copy = False):
+  """Preprocess moving a wine from one location to another
+  
+  Args:
+    UserInfo user: The UserInfo object of the user who is moving wines.
+    LocationInventory wine: The LocationInventory object of the wine being moved.
+    LocationMap location: The LocationMap object defining where to move the wine.
+    int count: The number of wines to move. If more than the actual quantity, move all.
+    bool copy: True if a copy of the wine is being stored in location, not the wine itself.
+  """
+  
+  
+def inputAddInventory(user, location):
+  """Preprocess addition of storage location to user's inventory
+  
+  Args:
+    UserInfo user: The UserInfo object of the user who is adding the inventory.
+    LocationMap location: Partially filled LocationMap object that only defines locationName and
+                          maybe imagePath.
   """
   validateUser(user)
   validateStorage(storage)
   addStorage(user,storage)
     
-def inputDeleteUserWine(user, wine):
+    
+def inputDeleteWineUser(user, wine, count):
   """Preprocess deletion of wine from user's inventory
+  
+  Args:
+    UserInfo user: The UserInfo object of the user who is deleting wine.
+    LocationInventory wine: The LocationInventory object of the wine being deleted.
+    int count: The number of this wine to delete. If more than actually exist, delete all.
   """
   validateUser(user)
   validateWine(wine)
   deleteUserWine(user,wine)
    
-def inputDeleteStorage(user, storage):
-  """Preprocess deletion of user's storage location
+   
+def inputDeleteInventory(user, location):
+  """Preprocess deletion of user's inventory location
+  
+  Args:
+    UserInfo user: The UserInfo object of the user who is deleting a location.
+    LocationMap location: The LocationMap object of the location being deleted.
   """
   validateUser(user)
   validateStorage(storage)
   deleteStorage(user,storage)
+
+
+def inputEditInventory(user, location, changes):
+  """Preprocess editing a user's inventory
   
-def inputAddToStorage(user, storage, wine):
-  """Preprocess addition of wine to user's storage
-  location
+  Args:
+    UserInfo user: The UserInfo object of the user who is deleting a location.
+    LocationMap location: The LocationMap object of the location being modified.
+    dict changes: A dictionary specifying properties and values of the form
+                  {locationName:*, imagePath:*, etc}. Not all fields stored in the
+                  database have to be present.
   """
-  validateUser(user)
-  validateStorage(storage)
-  validateWine(wine)
-  addToStorage(user,storage,wine)
+  
+  
+def inputEditEntryUser(user, wine, changes):
+  """Preprocess editing a wine in the user's inventory
+  
+  Args:
+    UserInfo user: The UserInfo object of the user who is editing wines.
+    LocationInventory wine: The LocationInventory object of the wine to be edited.
+    dict changes: A dictionary specifying properties and values of the form
+                  {li_locationID:*, quantity:*, etc}. Not all fields stored in the database
+                  have to be present.
+  """
+  
+  
+def inputImportInventory(user, xfile):
+  """Preprocess importing a new inventory using an XML file
+  
+  Args:
+    UserInfo user: The UserInfo object of the user who is importing an inventory.
+    XML xfile: The XML file. Specifies the properties of the
+               inventory and the wines stored in it.  There should be enough information
+               to fully generate an inventory.
+  """
+  
+  
+def inputExportInventory(user, location):
+  """Preprocess exporting an XML representation of an inventory
+  
+  Args:
+    UserInfo user: The UserInfo object of the user who is requesting an XML.
+    LocationMap location: The LocationMap object of the inventory location.
+  
+  Return:
+    The XML representation of the inventory.
+    OPTIONS TO CONSIDER: A link to a created XML, A string containing all the info
+  """
+  
+  
+def inputViewStats(user, location):
+  """Preprocess retrieval of statistics about an inventory
+  
+  Args:
+    UserInfo user: The UserInfo object of the user requesting stats.
+    LocationMap location: The LocationMap object of the location being analyzed.
+    
+  Return:
+    dict: A dictionary detailing information specified as required in Globals
+  """
+  
+  
+def inputSortInventory(user, location, key, descend = True):
+  """Preprocess sorting inventory by a specified key
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    LocationMap location: The LocationMap object of the inventory location.
+    string key: Determines what property to sort by ("dryness", "sweetness", etc).
+    bool descend: If key is a numeric property, check this to determine sort order.
+    
+  Return:
+    list: A list of LocationInventory objects in sorted order.
+  """
+
+
+def inputViewArchive(user, location):
+  """Preprocess retrieval of the archive of a user's inventory
+  
+  Args:
+    UserInfo user: The User object of the user.
+    LocationMap location: The LocationMap object of the inventory location.
+    
+  Return:
+    list: A list of LocationHistory objects.
+  """
+  
+  
+def inputRateWineUser(user, wine, rating):
+  """Preprocess storing user's rating of wine in database
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    LocationInventory wine: The LocationInventory object of the wine to be rated.
+    int rating: The rating on a 1-5 scale.
+  """
+
 
 def validateWine(wine):
   """ Check for invalid attributes and for null values in non null rows
