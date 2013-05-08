@@ -65,14 +65,15 @@ def validateWine(wine):
   raise the relevant exceptions for any error
   """
   # Check the object's attributes for null values
-  for attr in wine.__dict__.iteritems():
+  # TODO: Change this to only check nonnull columns
+  for attr in storage.__dict__.iteritems():
     if attr == None:
       raise Exception("NullException")
-
+    
   # Check the object's attributes for proper type
 
   # Check the object's attributes for proper range
-  
+
 
 def validateUser(user):
   """ Check for invalid attributes and for null values in non null rows
@@ -111,22 +112,67 @@ def validateUser(user):
     raise Exception("ImproperTypeException")
 
 
-  # Check the object's attributes for proper range
+  # Check the object's attributes for proper range #
+  
+  if len(user.emailAddress) > 255:
+    raise Exception("InvalidRangeException")
 
-  # TODO: Check for password length
+  if len(user.password) > 255:
+    raise Exception("InvalidRangeException")
+
+  # Passwords must be 6 characters or more
+  if len(user.password) < 6:
+    raise Exception("InvalidRangeException")
+
+  if len(user.name) > 255:
+    raise Exception("InvalidRangeException")
+
+  if len(user.location) > 255:
+    raise Exception("InvalidRangeException")
+  
   # TODO: Check for date of birth range
+
+  if len(user.imagePath) > 255:
+    raise Exception("InvalidRangeException")
 
 def validateStorage(storage):
   """ Check for invalid attributes and for null values in non null rows
   raise the relevant exceptions for any error
   """
-  # Check the object's attributes for null values
-  for attr in storage.__dict__.iteritems():
-    if attr == None:
-      raise Exception("NullException")
-  # Check the object's attributes for proper type
+  # Check the object's attributes for null values #
+  if storage.locationID == None:
+    raise Exception("NullException")
 
-  # Check the object's attributes for proper range
+  if storage.lm_userID == None:
+    raise Exception("NullException")
 
+  if storage.locationName == None:
+    raise Exception("NullException")
 
+  if storage.timeCreated == None:
+    raise Exception("NullException")
+
+  # Check the object's attributes for proper type #
+  if not isinstance(storage.locationID, (int,long)):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(storage.lm_userID, (int,long)):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(storage.locationName, basestring):
+    raise Exception("ImproperTypeException")
+
+  #TODO: Check timeCreated to make sure it's a valid timestamp
+
+  if not isinstance(storage.imagePath, basestring):
+    raise Exception("ImproperTypeException")
+
+  # Check the object's attributes for proper range #
+
+  if len(storage.locationName) > 255:
+    raise Exception("InvalidRangeException")
+
+  if len(storage.imagePath) > 255:
+    raise Exception("InvalidRangeException")
+  
 #Exceptions - null, invalid type input, out of range
