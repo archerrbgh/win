@@ -88,10 +88,9 @@ def searchInventory(user, wine):
     list: A list of LocationInventory objects of wines matching the search parameters.
   """
   
-@Inventory.route('/', user, wine, count, location)
-def addWineUser(user, wine, count, location = -1):
-  dbAddWineUser(user, wine, count)
-    """Add wine to user's inventory
+  
+def addWineUser(user, wine, count, location):
+  """Add wine to user's inventory
   
   Call the DataAccess layer to insert the given wine into the specified inventory.
   If the wine doesn't exist already, generate a new wineID for it and assign its location. 
