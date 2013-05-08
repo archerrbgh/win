@@ -27,7 +27,7 @@ def dbCreateUser(user):
   """
   
 
-def dbUpdateUser(user, attr):
+def dbEditUser(user, attr):
   """Update user profile in database with attributes
   
   Change information stored about the user in the database to match relevant information
