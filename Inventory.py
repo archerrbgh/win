@@ -48,6 +48,19 @@ def getLocationHistory(user, locationID, wineID):
   """
   
 
+def getInventory(user):
+  """Retrieve a user's inventory from database
+  
+  Return a list of LocationInventory objects representing the wines in a user's inventory.
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    
+  Return:
+    list: A list of LocationInventory objects detailing the user's entire inventory. 
+  """
+
+
 def addLocationHistory(user, locationID, wineID, eventTag):
   """Add a Location History to the database.
   
@@ -68,9 +81,8 @@ def searchInventory(user, wine):
   
   Args:
     UserInfo user: The UserInfo object of the user.
-    LocationInventory wine: A partially filled LocationInventory object detailing properties of the wine 
-                            to look for. Not all fields stored in the database have to be present as 
-                            instance variables, some of which might be None.
+    dict wine: A dict detailing properties of the wine to look for. Not all fields stored 
+               in the database have to be present.
                
   Return:
     list: A list of LocationInventory objects of wines matching the search parameters.
@@ -188,7 +200,7 @@ def editEntryUser(user, wine, changes):
   """
   
   
-def importInventory(user, file):
+def importInventory(user, xfile):
   """Import a new inventory using an XML file
   
   Call the DataAccess layer to create a new inventory and give it the properties detailed
@@ -196,9 +208,9 @@ def importInventory(user, file):
   
   Args:
     UserInfo user: The UserInfo object of the user who is importing an inventory.
-    XML file: The XML file. Specifies the properties of the
-              inventory and the wines stored in it.  There should be enough information
-              to fully generate an inventory.
+    XML xfile: The XML file. Specifies the properties of the
+               inventory and the wines stored in it.  There should be enough information
+               to fully generate an inventory.
   """
   
   
