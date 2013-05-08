@@ -132,6 +132,21 @@ def dbGetLocationHistory(user, locationID, wineID):
   """
   
   
+def dbSearchInventory(user, wine):
+  """Search through inventories for matching wine.
+  
+  Find wines matching the specified properties.
+  
+  Args:
+    UserInfo user: The UserInfo object of the user.
+    dict wine: A dict detailing properties of the wine to look for. Not all fields stored 
+               in the database have to be present.
+               
+  Return:
+    list: A list of LocationInventory objects of wines matching the search parameters.
+  """
+  
+  
 def dbAddWineUser(user, wine, count):
   """Add a wine to the user's inventory in database
   
