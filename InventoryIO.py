@@ -7,7 +7,6 @@
 import Inventory
 import re
 
-
 def inputGetInventory(user):
   """Preprocess retrieval of user's inventory
   """
@@ -22,8 +21,6 @@ def inputAddWineUser(user, wine):
   validateWine(wine)
   addWineUser(user,wine)
   
-  
-
 def inputAddStorage(user, storage):
   """Preprocess addition of storage location to
   user's inventory
@@ -31,25 +28,20 @@ def inputAddStorage(user, storage):
   validateUser(user)
   validateStorage(storage)
   addStorage(user,storage)
-  
-  
+    
 def inputDeleteUserWine(user, wine):
   """Preprocess deletion of wine from user's inventory
   """
   validateUser(user)
   validateWine(wine)
   deleteUserWine(user,wine)
-  
-  
-  
-  
+   
 def inputDeleteStorage(user, storage):
   """Preprocess deletion of user's storage location
   """
   validateUser(user)
   validateStorage(storage)
   deleteStorage(user,storage)
-  
   
 def inputAddToStorage(user, storage, wine):
   """Preprocess addition of wine to user's storage
@@ -64,15 +56,91 @@ def validateWine(wine):
   """ Check for invalid attributes and for null values in non null rows
   raise the relevant exceptions for any error
   """
-  # Check the object's attributes for null values
-  # TODO: Change this to only check nonnull columns
-  for attr in storage.__dict__.iteritems():
-    if attr == None:
-      raise Exception("NullException")
-    
-  # Check the object's attributes for proper type
+  # Check the object's attributes for null values #
+  if wine.li_locationID == None:
+    raise Exception("NullException")
 
-  # Check the object's attributes for proper range
+  if wine.li_wineID == None:
+    raise Exception("NullException")
+
+  if wine.quantity == None:
+    raise Exception("NullException")
+
+  if wine.isWishlist == None:
+    raise Exception("NullException")
+    
+  # Check the object's attributes for proper type #
+
+  if not isinstance(wine.li_locationID, (int,long)):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.li_wineID, (int,long)):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.quantity, (int,long)):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.personalStarRating, (int,long)):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.isWishlist, bool):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.bitter, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.sweet, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.sour, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.salty, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.chemical, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.pungent, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.oxidized, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.microbiological, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.floral, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.spicy, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.fruity, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.vegetative, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.nutty, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.carmelized, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.woody, float):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(wine.earthy, float):
+    raise Exception("ImproperTypeException")
+
+  # Check the object's attributes for proper range #
+
+  if wine.personalStarRating < 0 or wine.personalStarRating > 5:
+    raise Exception("InvalidRangeException")
+
+  ### TODO: Check all floats for negative values
+  ### TODO: Check ints for negative values
 
 
 def validateUser(user):
