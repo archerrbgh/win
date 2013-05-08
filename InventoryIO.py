@@ -136,11 +136,65 @@ def validateWine(wine):
 
   # Check the object's attributes for proper range #
 
+  if wine.li_locationID < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.li_wineID < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.quantity < 0:
+    raise Exception("InvalidRangeException")
+
   if wine.personalStarRating < 0 or wine.personalStarRating > 5:
     raise Exception("InvalidRangeException")
 
-  ### TODO: Check all floats for negative values
-  ### TODO: Check ints for negative values
+  if wine.bitter < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.sweet < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.sour < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.salty < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.chemical < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.pungent < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.oxidized < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.microbiological < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.floral < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.spicy < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.fruity < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.vegetative < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.nutty < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.caramelized < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.woody < 0:
+    raise Exception("InvalidRangeException")
+
+  if wine.earthy < 0:
+    raise Exception("InvalidRangeException")
 
 
 def validateUser(user):
@@ -181,6 +235,9 @@ def validateUser(user):
 
 
   # Check the object's attributes for proper range #
+
+  if user.userID < 0:
+    raise Exception("InvalidRangeException")
   
   if len(user.emailAddress) > 255:
     raise Exception("InvalidRangeException")
@@ -236,6 +293,12 @@ def validateStorage(storage):
     raise Exception("ImproperTypeException")
 
   # Check the object's attributes for proper range #
+
+  if storage.locationID < 0:
+    raise Exception("InvalidRangeException")
+
+  if storage.lm_userID < 0:
+    raise Exception("InvalidRangeException")
 
   if len(storage.locationName) > 255:
     raise Exception("InvalidRangeException")
