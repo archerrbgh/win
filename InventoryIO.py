@@ -6,6 +6,7 @@
 
 import Inventory
 import re
+import datetime
 
 def inputGetInventory(user):
   """Preprocess retrieval of user's inventory
@@ -228,7 +229,11 @@ def validateUser(user):
   if not isinstance(user.location, basestring):
     raise Exception("ImproperTypeException")
 
-  # TODO: check if dateOfBirth is a valid date
+  # Check if dateOfBirth is a valid date
+  try:
+    datetime.datetime.strptime(user.dateOfBirth, '%Y-%m-%d')
+  except ValueError:
+    raise Exception("ImproperTypeException")
 
   if not isinstance(user.imagePath, basestring):
     raise Exception("ImproperTypeException")
@@ -255,7 +260,9 @@ def validateUser(user):
   if len(user.location) > 255:
     raise Exception("InvalidRangeException")
   
-  # TODO: Check for date of birth range
+  # Check for date of birth range. No Methuselahs allowed
+  if int(user.dateOfBirth[:4]) < 1910:
+    raise Exception("InvalidRangeException")
 
   if len(user.imagePath) > 255:
     raise Exception("InvalidRangeException")
@@ -287,7 +294,11 @@ def validateStorage(storage):
   if not isinstance(storage.locationName, basestring):
     raise Exception("ImproperTypeException")
 
-  #TODO: Check timeCreated to make sure it's a valid timestamp
+  # Check timeCreated to make sure it's a valid timestamp
+  try:
+    datetime.datetime.strptime(storage.timeCreated, "%d-%m-%Y %I:%M:%S")
+  except ValueError:
+    raise Exception("ImproperTypeException")
 
   if not isinstance(storage.imagePath, basestring):
     raise Exception("ImproperTypeException")
