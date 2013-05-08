@@ -136,6 +136,8 @@ def deleteWineUser(user, wine, count):
     LocationInventory wine: The LocationInventory object of the wine being deleted.
     int count: The number of this wine to delete. If more than actually exist, delete all.
   """
+  dbDeleteWineUser(user,wine,count)
+  addLocationHistory(user, wine.li_locationID, wine.li_wineID, "delete wine")
   
   
 def deleteInventory(user, location):
@@ -148,6 +150,10 @@ def deleteInventory(user, location):
     UserInfo user: The UserInfo object of the user who is deleting a location.
     LocationMap location: The LocationMap object of the location being deleted.
   """
+  dbDeleteInventory(user,location)
+  # TODO: What is the appropriate wineID here?
+  # TODO: What tags are there to choose from?
+  addLocationHistory(user, location.locationID, wineID, "delete inventory")
 
 
 def editInventory(user, location, changes):
