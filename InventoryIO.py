@@ -5,6 +5,7 @@
 # to raise up to the ajax layer
 
 import Inventory
+import re
 
 
 def inputGetInventory(user):
@@ -60,16 +61,72 @@ def inputAddToStorage(user, storage, wine):
   addToStorage(user,storage,wine)
 
 def validateWine(wine):
-  # Check for invalid attributes and for null values in non null rows
-  # raise the relevant exceptions for any error
+  """ Check for invalid attributes and for null values in non null rows
+  raise the relevant exceptions for any error
+  """
+  # Check the object's attributes for null values
+  for attr in wine.__dict__.iteritems():
+    if attr == None:
+      raise Exception("NullException")
+
+  # Check the object's attributes for proper type
+
+  # Check the object's attributes for proper range
+  
 
 def validateUser(user):
-  # Check for invalid attributes and for null values in non null rows
-  # raise the relevant exceptions for any error
+  """ Check for invalid attributes and for null values in non null rows
+  raise the relevant exceptions for any error
+  """
+  # Check the object's attributes for null values #
+  if user.userID == None:
+    raise Exception("NullException")
+  if user.emailAddress == None:
+    raise Exception("NullException")
+  if user.password == None:
+    raise Exception("NullException")
+
+    
+  # Check the object's attributes for proper type #
+  if not isinstance(user.userID , (int,long)):
+    raise Exception("ImproperTypeException")
+  
+  # regex match to check for valid email
+  if not re.match(r"[^@]+@[^@]+\.[^@]+", user.emailAddress):
+    raise Exception("ImproperTypeException")
+  
+  if not isinstance(user.password, basestring):
+    raise Exception("ImproperTypeException")
+
+  # Note: What will happen here if user.name ==  None?
+  if not isinstance(user.name, basestring):
+    raise Exception("ImproperTypeException")
+
+  if not isinstance(user.location, basestring):
+    raise Exception("ImproperTypeException")
+
+  # TODO: check if dateOfBirth is a valid date
+
+  if not isinstance(user.imagePath, basestring):
+    raise Exception("ImproperTypeException")
+
+
+  # Check the object's attributes for proper range
+
+  # TODO: Check for password length
+  # TODO: Check for date of birth range
 
 def validateStorage(storage):
-  # Check for invalid attributes and for null values in non null rows
-  # raise the relevant exceptions for any error
+  """ Check for invalid attributes and for null values in non null rows
+  raise the relevant exceptions for any error
+  """
+  # Check the object's attributes for null values
+  for attr in storage.__dict__.iteritems():
+    if attr == None:
+      raise Exception("NullException")
+  # Check the object's attributes for proper type
+
+  # Check the object's attributes for proper range
 
 
-#Exceptions - null, invalid input
+#Exceptions - null, invalid type input, out of range
