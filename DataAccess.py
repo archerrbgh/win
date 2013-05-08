@@ -1,21 +1,6 @@
 """Data access module
 """
-#I'm unsure if this is the proper layer for something like this
-#but I am also pretty sure its the only layer that can really answer
-#the question
-def dbUserExists(userID)
-  """
-  Will query the database and see if a particular user exists
-  This method would be nice from a performence standpoint;
-  quite a few times I don't need to know much about the user
-  save that they exist
   
-  args: int userID
-  returns True if user exists
-          False otherwise
-  """
-  
-
 def dbGetUser(userID):
   """Retrive a user's profile from database
   
