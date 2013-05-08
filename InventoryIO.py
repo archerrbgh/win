@@ -89,11 +89,13 @@ def inputSearchInventory(user, wine):
 def inputAddWineUser(user, wine, count, location):
   """Preprocess addition of wine to user's inventory
   
+  Create a LocationInventory object using the wine dict and pass it to the Model layer.
+  
   Args:
     UserInfo user: The UserInfo object of the user who is adding the wine.
-    LocationInventory wine: A partially filled LocationInventory object representing the wine.
-                            Not all the fields stored in the database have to be present,
-                            such as li_locationID and li_wineID.
+    dict wine: A dict representing the wine with format similar to the class' instance variables.
+               Not all the fields stored in the database have to be present,
+               such as li_locationID and li_wineID.
     int count: The quantity of this wine to add.
     LocationMap location: The LocationMap object defining which inventory to insert in.
   """
@@ -117,10 +119,11 @@ def inputMoveWine(user, wine, location, count, copy = False):
 def inputAddInventory(user, location):
   """Preprocess addition of storage location to user's inventory
   
+  Create a LocationMap object using the location dict and pass it to the Model layer.
+  
   Args:
     UserInfo user: The UserInfo object of the user who is adding the inventory.
-    LocationMap location: Partially filled LocationMap object that only defines locationName and
-                          maybe imagePath.
+    dict location: dict that only defines locationName and maybe imagePath.
   """
   validateUser(user)
   validateStorage(storage)
