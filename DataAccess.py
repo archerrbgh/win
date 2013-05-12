@@ -1,6 +1,5 @@
 """Data access module
-"""
-  
+""" 
 def dbGetUser(userID):
   """Retrive a user's profile from database
   
@@ -24,7 +23,28 @@ def dbCreateUser(user):
   Args:
     UserInfo user: UserInfo object representing the user. Take all fields from this object.
   """
-  
+  	# Make an empty error dictionary
+   	err = {}
+   	
+	email = user.email
+  	pw = user.password
+  	name = user.name
+  	loc = user.location
+  	dob = user.dob
+  	image = user.imagePath
+  	
+  	#Create new UserInfo object to add to database
+  	person = UserInfo(email, password, name, location, dob, image)
+  	
+  	db.session.add(person)
+  	#db.session.add(user)
+  	db.session.commit()
+  	
+  	if not err:
+  		return (person, err)
+  	else:
+  		return (None, err)
+		
 
 def dbEditUser(user, attr):
   """Update user profile in database with attributes
@@ -55,6 +75,44 @@ def dbGetWinesByName(name):
 def dbAddWineGlobal(wine):
   """Add a new wine to the global database
   """
+  #name = wine.wineName
+  #varietal = wine.varietal
+  #winery = wine.winery
+  #type = wine.wineType
+  #vintage = wine.vintage
+  #region = wine.region
+  #clusterID = wine.clusterID
+  #cso = wine.cso
+  #tags = wine.tags
+  #description = wine.description
+  #averageRating = wine.averageStarRating
+  #image = wine.imagePath
+  #barcode = wine.barcode
+  #bitter = wine.bitter
+  #sweet = wine.sweet
+  #sour = wine.sour
+  #salty = wine.salty
+  #chemical = wine.chemical
+  #pungent = wine.pungent
+  #oxidized = wine.oxidized
+  #microbio = wine.microbiological
+  #floral = wine.floral
+  #spicy = wine.spicy
+  #fruity = wine.fruity
+  #vegetative = wine.vegetative
+  #nutty = wine.nutty
+  #caramel = wine.carmelized
+  #woody = wine.woody
+  #earthy = wine.earthy
+  #bottle = Wine(name, varietal, winery, type, vintage, region, clusterID, cso, tags, description,\
+  #       		averageRating, image, barcode, bitter, sweet, sour, salty, chemical, pungent,\
+  #       		oxidized, microbio, floral, spicy, fruity, vegetative, nutty, caramel, woody,\
+  #       		earthy)
+  #db.session.add(bottle)
+  db.session.add(wine)
+  db.session.commit()
+  
+  return ()
   
   
 def dbDeleteWineGlobal(wine):
@@ -159,7 +217,8 @@ def dbAddWineUser(user, wine, count):
     int count: The number of this wine to add.
   """
   
-  
+  count++
+    
 def dbAddInventory(user, location):
   """Add a new inventory location to user's profile in database
   
